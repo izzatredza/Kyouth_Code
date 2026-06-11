@@ -43,11 +43,4 @@ def run_data_profile(db_path):
     max_description_length = cursor.fetchone()[0]
     print(f"🚨  Maximum Description Length: {max_description_length}")
 
-    # Example: Count jobs by location
-    cursor.execute("SELECT location, COUNT(*) FROM jobs GROUP BY location")
-    jobs_by_location = cursor.fetchall()
-    print("Jobs by Location:")
-    for location, count in jobs_by_location:
-        print(f"{location}: {count}")
-
     conn.close()
