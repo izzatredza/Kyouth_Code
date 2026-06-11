@@ -2,7 +2,7 @@ from pathlib import Path
 from src.ingestor import ingest_all_mhtml
 from src.processor import process_all_html
 from src.loader import load_all_jsons
-# from src.run_data_profile import run_data_profile
+from src.profiler import run_data_profile
 
 import sys
 
@@ -15,7 +15,7 @@ DB_NAME = "jobs.db"
 
 def run_profiler():
     db_path = GOLD_DIR / DB_NAME
-    # run_data_profile(db_path)
+    run_data_profile(db_path)
 
 
 def run_gold():
@@ -41,7 +41,7 @@ def main():
         "ingest": run_bronze,
         "process": run_silver,
         "load": run_gold,
-        # "profile": run_profiler,
+        "profile": run_profiler,
     }
 
     if len(sys.argv) < 2:
