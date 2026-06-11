@@ -44,11 +44,20 @@ def main():
         "profile": run_profiler,
     }
 
+    # Dynamically build your string syntax: "ingest|process|load|profile|all"
+    options_string = "|".join(list(commands.keys()) + ["all"])
+
     if len(sys.argv) < 2:
-        print("Usage: python main.py ingest")
+        print(f"Usage: python main.py [{options_string}]")
         return
 
     command = sys.argv[1]
+
+    if command == "all":
+        run_bronze()
+        run_silver()
+        run_gold()
+        run_profiler()
 
     if command in commands:
         commands[command]()
