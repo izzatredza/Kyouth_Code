@@ -4,10 +4,10 @@ from pydantic import BaseModel, Field, ValidationError
 
 
 class Job(BaseModel):
-    source_id: str = Field(..., description="Unique identifier for the job posting")
-    job_title: str = Field(..., description="Title of the job position")
-    company: str = Field(..., description="Name of the company offering the job")
-    description: str = Field(..., description="Description of the job responsibilities")
+    source_id: str
+    job_title: str
+    company: str
+    description: str
 
 
 def process_all_html(input_dir, output_dir):
@@ -73,8 +73,6 @@ def process_all_html(input_dir, output_dir):
         if source_id == "" or job_title == "" or company == "" or description == "":
             skipped += 1
             continue  # Skip processing this file if any field is empty
-        else:
-            print(f"✅ Processed: {file.name}")
 
         try:
             job = Job(
