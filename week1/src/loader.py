@@ -65,6 +65,7 @@ def load_all_jsons(input_dir, output_dir):
                     data.get("company"),
                     data.get("description"),
                 ),
+                print(f"⏭️ Skipped (duplicate): {file.name}"),
             )
 
             print(f"✅ Inserted: {file.name}")
