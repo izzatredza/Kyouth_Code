@@ -13,7 +13,7 @@ def load_all_jsons(input_dir, output_dir):
 
     print("🥇 Gold...")
 
-    db_path = output_dir / "jobs.db"
+    db_path = output_path / "jobs.db"  # Fixed: ensured output_path is a Path object
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
 
@@ -25,9 +25,8 @@ def load_all_jsons(input_dir, output_dir):
             company TEXT,
             description TEXT
         )
-    """
+        """
     )
-
     connection.commit()
 
     total = len(json_files)
@@ -39,41 +38,35 @@ def load_all_jsons(input_dir, output_dir):
             with open(file, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            cursor.execute(
-                """
-                INSERT INTO jobs (source_id, job_title, company, description)
-                VALUES (?, ?, ?, ?)
-            """,
-                (
-                    data["source_id"],
-                    data["job_title"],
-                    data["company"],
-                    data["description"],
-                ),
-            )
-            connection.commit()
-
-            # Insert or Ignore skips the file if the source_id is already in the DB
+            # Use INSERT OR IGNORE natively to handle duplicates gracefully
             cursor.execute(
                 """
                 INSERT OR IGNORE INTO jobs (source_id, job_title, company, description)
                 VALUES (?, ?, ?, ?)
-            """,
+                """,
                 (
                     data.get("source_id"),
                     data.get("job_title"),
                     data.get("company"),
                     data.get("description"),
                 ),
-                print(f"⏭️ Skipped (duplicate): {file.name}"),
             )
+            connection.commit()
 
-            print(f"✅ Inserted: {file.name}")
-            inserted += 1
+            # cursor.rowcount will be 1 if inserted, 0 if skipped (duplicate)
+            if cursor.rowcount > 0:
+                print(f"✅ Inserted: {file.name}")
+                inserted += 1
+            else:
+                print(f"⏭️ Skipped (duplicate): {file.name}")
+                skipped += 1
 
         except Exception as e:
-            print(f"⚠️ Failed to insert {file.name}: {e}")
+            print(f"⚠️ Failed to process {file.name}: {e}")
             skipped += 1
+
+    # Close the connection when done
+    connection.close()
 
     print("\n📊 Gold Summary:")
     print(f"Total: {total} | Inserted: {inserted} | Skipped: {skipped}")
