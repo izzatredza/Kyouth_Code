@@ -31,7 +31,6 @@ uv sync
 This will create/update the project environment and install dependencies from `pyproject.toml`.
 
 
-
 ## 3) Run the pipeline
 Run the full flow (ingest -> process -> load -> profile):
 
@@ -58,10 +57,6 @@ uv run main.py profile
 ```bash
 uv run main.py <command>
 ```
-
-## If command fails
-- `Invalid input`: command argument is missing or not one of `ingest/process/load/profile/all`
-- `Database not found`: run `uv run main.py load` first, then `uv run main.py profile`
 
 # Technical Reflection
 

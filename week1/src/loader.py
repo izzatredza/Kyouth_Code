@@ -23,7 +23,8 @@ def load_all_jsons(input_dir, output_dir):
             source_id TEXT PRIMARY KEY,
             job_title TEXT,
             company TEXT,
-            description TEXT
+            description TEXT,
+            tech_stack TEXT
         )
         """
     )
@@ -41,14 +42,15 @@ def load_all_jsons(input_dir, output_dir):
             # Use INSERT OR IGNORE natively to handle duplicates gracefully
             cursor.execute(
                 """
-                INSERT OR IGNORE INTO jobs (source_id, job_title, company, description)
-                VALUES (?, ?, ?, ?)
+                INSERT OR IGNORE INTO jobs (source_id, job_title, company, description, tech_stack)
+                VALUES (?, ?, ?, ?, ?)
                 """,
                 (
                     data.get("source_id"),
                     data.get("job_title"),
                     data.get("company"),
                     data.get("description"),
+                    data.get("tech_stack", ""),
                 ),
             )
             connection.commit()
