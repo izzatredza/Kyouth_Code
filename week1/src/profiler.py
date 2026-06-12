@@ -31,16 +31,22 @@ def run_data_profile(db_path):
     avg_description_length = cursor.fetchone()[0]
     print(f"📝 Average Description Length: {avg_description_length}")
 
-    cursor.execute(
-        """ SELECT Length(description) as len FROM jobs WHERE description IS NOT NULL ORDER BY len ASC LIMIT 1 """
-    )
-    min_description_length = cursor.fetchone()[0]
+    cursor.execute(""" 
+        SELECT LENGTH(description) as len, source_id, job_title 
+        FROM jobs 
+        WHERE description IS NOT NULL AND description != ''
+        ORDER BY len ASC 
+        LIMIT 1 
+    """)
+    min_description_length, min_id, min_title = cursor.fetchone()
     print(f"⚠️  Minimum Description Length: {min_description_length}")
+    print(f"   ↳ source_id: {min_id} | job_title: {min_title}")
 
     cursor.execute(
-        """ SELECT Length(description) as len FROM jobs WHERE description IS NOT NULL ORDER BY len DESC LIMIT 1 """
+        """ SELECT LENGTH(description) as len, source_id, job_title FROM jobs WHERE description IS NOT NULL AND description != '' ORDER BY len DESC LIMIT 1 """
     )
-    max_description_length = cursor.fetchone()[0]
+    max_description_length, max_id, max_title = cursor.fetchone()
     print(f"🚨  Maximum Description Length: {max_description_length}")
+    print(f"   ↳ source_id: {max_id} | job_title: {max_title}")
 
     conn.close()
