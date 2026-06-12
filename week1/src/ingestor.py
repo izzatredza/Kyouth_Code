@@ -18,6 +18,11 @@ def ingest_all_mhtml(input_dir, output_dir):
 
     print("🥉 Bronze...")
 
+    if not input_path.exists():
+        print(f"❌ Error: Source directory '{input_dir}' does not exist.")
+        print("📊 Bronze Summary: Total: 0 | Extracted: 0 | Failed: 0")
+        return
+
     for file in files:
         try:
             with open(file, "r", encoding="utf-8") as f:
