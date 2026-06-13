@@ -39,7 +39,6 @@ def load_all_jsons(input_dir, output_dir):
             with open(file, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            # Use INSERT OR IGNORE natively to handle duplicates gracefully
             cursor.execute(
                 """
                 INSERT OR IGNORE INTO jobs (source_id, job_title, company, description, tech_stack)
@@ -55,7 +54,6 @@ def load_all_jsons(input_dir, output_dir):
             )
             connection.commit()
 
-            # cursor.rowcount will be 1 if inserted, 0 if skipped (duplicate)
             if cursor.rowcount > 0:
                 print(f"✅ Inserted: {file.name}")
                 inserted += 1
@@ -67,7 +65,6 @@ def load_all_jsons(input_dir, output_dir):
             print(f"⚠️ Failed to process {file.name}: {e}")
             skipped += 1
 
-    # Close the connection when done
     connection.close()
 
     print("\n📊 Gold Summary:")
