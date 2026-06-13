@@ -13,7 +13,7 @@ def load_all_jsons(input_dir, output_dir):
 
     print("🥇 Gold...")
 
-    db_path = output_path / "jobs.db"  # Fixed: ensured output_path is a Path object
+    db_path = output_path / "jobs.db"
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
 
