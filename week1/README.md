@@ -38,9 +38,19 @@ Run the full flow (ingest -> process -> load -> profile):
 uv run main.py all
 ```
 
-Or run only profiling:
+## Command syntax
+Or run only specific function just put main.py (action) *remove the bracket
 
 ```bash
+uv run main.py (action)
+```
+
+## Example
+
+```bash
+uv run main.py ingest
+uv run main.py process
+uv run main.py load
 uv run main.py profile
 ```
 
@@ -52,11 +62,6 @@ uv run main.py profile
 
 - Keep the expected folder structure under `data/`
 
-## Command syntax
-
-```bash
-uv run main.py <command>
-```
 
 # Technical Reflection
 
