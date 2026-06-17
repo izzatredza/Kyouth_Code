@@ -42,7 +42,7 @@ def prompt_gemini(model: str, prompt: str) -> str:
 
 def prompt_model(model: str, prompt: str) -> str:
 
-    ollama_models = {"llama3.1", "phi3", "deepseek-r1:1.5b"}
+    ollama_models = {"llama3.1", "phi3", "deepseek-r1:1.5b", "gemma"}
     gemini_models = {
         "gemini-2.5-flash",
         "gemini-2.5-flash-lite",
