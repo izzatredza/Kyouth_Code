@@ -26,7 +26,6 @@ async def tag_data(db_url: str):
     async with mcp_client:
         db_raw_response = await mcp_client.call_tool(
             "fetch_untagged_jobs",
-            {"limit": 8},
         )
 
         # FastMCP tool responses wrap data inside content blocks; extract the string text

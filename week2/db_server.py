@@ -6,7 +6,7 @@ DB_PATH = "data/jobs_d1.db"
 
 
 @mcp.tool
-def fetch_untagged_jobs(limit: int = 8) -> str:
+def fetch_untagged_jobs() -> str:
     """Fetches a specific number of jobs where tech_stack is empty."""
     try:
         with sqlite3.connect(DB_PATH) as conn:
@@ -15,13 +15,11 @@ def fetch_untagged_jobs(limit: int = 8) -> str:
                 """
                 SELECT source_id, description FROM jobs 
                 WHERE tech_stack IS NULL OR tech_stack = '' 
-                LIMIT ?
             """,
-                (limit,),
             )
             return str(cursor.fetchall())
-    except sqlite3.Error as e:
-        return f"[]"
+    except sqlite3.Error:
+        return "[]"
 
 
 @mcp.tool
@@ -37,9 +35,9 @@ def update_job_tech_stack(job_id: int, tech_stack: str) -> str:
                 (tech_stack, job_id),
             )
             conn.commit()
-            return f"Success"
-    except sqlite3.Error as e:
-        return f"Error: {e}"
+            return "Success"
+    except sqlite3.Error:
+        return "Error: Failed to update job tech stack"
 
 
 if __name__ == "__main__":
