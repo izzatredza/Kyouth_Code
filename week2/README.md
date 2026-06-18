@@ -29,7 +29,7 @@ The goal of this project is to build an automated data enrichment and analysis p
 3. Go to **Google AI Studio** make an account and create your **API key**
 
 
-4. Go to **Enviroment Variable** at your pc and click new. Put the name as **GEMINI_API KEY** and put **API KEY** value at the value text box
+4. Go to **Enviroment Variable** at your local computer and click new. Put the name as **GEMINI_API_KEY** and put **API KEY** value at the value text box
 
 
 5. Clone the github repo:
@@ -44,7 +44,7 @@ From the `week2` directory:
     cd week2
     uv sync
     ```
-Now you good and ready to go
+   Now you good and ready to go
 
 ### Running the code
 
@@ -69,7 +69,7 @@ Now you good and ready to go
     Because they make up everything!
     ```
 
-the model that is available are ***llama3.1 , phi3, deepseek-r1:1.5b, gemma, gemini-2.5-flash, gemini-2.5-flash-lite, gemini-3-flash-preview**
+   the model that is available are ***llama3.1 , phi3, deepseek-r1:1.5b, gemma, gemini-2.5-flash, gemini-2.5-flash-lite, gemini-3-flash-preview**
 
 2. **tag_data.py**
 
