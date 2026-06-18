@@ -18,7 +18,7 @@ The goal of this project is to build an automated data enrichment and analysis p
 ### Installation & Environment Setup
 1. Download the **Ollama software** at https://github.com/ollama/ollama/releases/tag/v0.21.3-rc0 and download the **OllamaSetup.exe** file
 
-2. Once the install is complete go to powershell and use this command:
+2. Once the install is complete, Open the ollama app and sign-in. Then go to powershell and use this command:
     ```bash
     ollama pull llama3.1
     ollama pull phi3
