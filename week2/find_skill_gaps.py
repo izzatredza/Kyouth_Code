@@ -89,4 +89,4 @@ if __name__ == "__main__":
     result = find_skill_gaps(RESUME_PATH, DATABASE_PATH)
 
     print("\n--- Identified Skill Gaps ---")
-    print(result.gaps)
+    print("gaps =", result.gaps)
