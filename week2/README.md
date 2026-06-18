@@ -159,7 +159,7 @@ From the `week2` directory:
 
  Boundary Validation: Tested with edge-case skills containing unique programming symbols (like C++ or C#) to make sure they match correctly without bleeding into random words like "cloud" or "docker".
 
-4. **Limitations**
+### 4. Limitations
 
  Rate Limits: Since we are using standard free-tier Gemini API parameters (10 Requests Per Minute), attempting to run the data tagging script on thousands of rows simultaneously without setting a loop delay could trigger a `429 Resource Exhausted block`.
 
