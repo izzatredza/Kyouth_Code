@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from fastmcp import FastMCP
 
@@ -8,8 +9,13 @@ DB_PATH = "data/jobs_d1.db"
 @mcp.tool
 def fetch_untagged_jobs() -> str:
     """Fetches a specific number of jobs where tech_stack is empty."""
+
+    if not os.path.exists(DB_PATH):
+        print(f"[Server Error] Database file not found at {DB_PATH}")
+        return "[]"
+
     try:
-        with sqlite3.connect(DB_PATH) as conn:
+        with sqlite3.connect(f"file:{DB_PATH}?mode=rw", uri=True) as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -19,6 +25,7 @@ def fetch_untagged_jobs() -> str:
             )
             return str(cursor.fetchall())
     except sqlite3.Error:
+        print(f"[Server Error] Failed to fetch untagged jobs from {DB_PATH}")
         return "[]"
 
 
