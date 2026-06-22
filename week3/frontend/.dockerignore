@@ -1,0 +1,21 @@
+# Ignore local Python cache files
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore local virtual environments (Docker builds its own inside the container)
+.venv/
+venv/
+env/
+
+# Ignore local development tools and environment configurations
+.git/
+.gitignore
+.dockerignore
+.python-version
+.uv
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
