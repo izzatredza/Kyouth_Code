@@ -1,0 +1,7 @@
+# Ignore environment variable files anywhere in the project
+.env
+*.env
+
+# Ignore python caches and virtual environments anywhere
+**/__pycache__/
+**/.venv/
