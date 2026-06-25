@@ -105,7 +105,7 @@ Bash
 
 curl -X POST "http://localhost:8001/chat" \
      -H "Content-Type: application/json" \
-     -d '{"message": "hi", "pdf_text": ""}'
+     -d '{"message": "Hello"}'
 
 Expected Output: A structured status 200 OK response mapping featuring a valid string reply from the engine.
 Frontend UI Verification
