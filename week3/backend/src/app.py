@@ -1,7 +1,6 @@
 import os
-import sys
 import importlib.util
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from google import genai

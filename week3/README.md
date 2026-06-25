@@ -102,10 +102,9 @@ Backend Testing Triage (curl)
 
 To verify the health and path resolution of the backend server independently of the web browser UI layout, run this command in an isolated terminal window:
 Bash
-
-curl -X POST "http://localhost:8001/chat" \
-     -H "Content-Type: application/json" \
-     -d '{"message": "Hello"}'
+```
+>curl -X POST "http://localhost:8001/chat" -H "Content-Type: application/json" -d "{\"message\": \"Hello\", \"pdf_text\": \"\"}"}'
+```
 
 Expected Output: A structured status 200 OK response mapping featuring a valid string reply from the engine.
 Frontend UI Verification
