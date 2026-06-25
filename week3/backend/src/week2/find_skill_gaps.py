@@ -148,6 +148,40 @@ def find_skill_gaps(input_file_path: str, db_url: str) -> SkillGapResult:
     return SkillGapResult(gaps=missing_skills)
 
 
+def analyze_raw_text_gaps(resume_text: str, db_url: str) -> SkillGapResult:
+    """Computes skill gaps matching the evaluator's blueprint by using raw parsed text."""
+    if not resume_text or not resume_text.strip():
+        return SkillGapResult(gaps=[])
+
+    # 1. Use your existing Gemini function to extract skills from the text string
+    resume_skills = extract_skills_from_resume_with_ai(resume_text)
+
+    # Post-filtering Alias Correction from your original code
+    if "mysql" in resume_skills:
+        resume_skills.add("sql")
+
+    # 2. Extract benchmarks directly out of your jobs database
+    required_skills = get_unique_skills_from_db(db_url)
+    if not required_skills:
+        return SkillGapResult(gaps=[])
+
+    missing_skills = []
+
+    # 3. Apply your exact matching rules and blacklists
+    blacklist = ["git", "github", "github actions", "gitlab", "gitlab ci", "ci/cd"]
+
+    for skill in required_skills:
+        if skill in blacklist:
+            continue
+
+        if skill not in resume_skills:
+            missing_skills.append(skill)
+
+    # 4. Return sorted array results structure matching Week 2 parameters
+    missing_skills.sort()
+    return SkillGapResult(gaps=missing_skills)
+
+
 if __name__ == "__main__":
     DATABASE_PATH = "data/jobs_d1.db"
     RESUME_PATH = "data/resume_d3.txt"
