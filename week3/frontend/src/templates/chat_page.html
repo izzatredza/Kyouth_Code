@@ -114,13 +114,14 @@
 
             // Post to backend asynchronous target endpoint
             try {
-                const response = await fetch(BACKEND_URL, {
+                const response = await fetch(`${BACKEND_URL}/chat`, { // Added /chat to point to your endpoint
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
                 });
+
 
                 const data = await response.json();
 

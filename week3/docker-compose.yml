@@ -10,6 +10,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    environment:
+      - BACKEND_URL=http://localhost:8001
     networks:
       - app-network
     depends_on:
