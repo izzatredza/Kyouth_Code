@@ -31,7 +31,7 @@ GEMINI_API_KEY=your_actual_google_gemini_api_key_here
 
 Security Note: The .env file is explicitly blocked from Git tracking via .gitignore and omitted from image building processes via .dockerignore to completely eliminate credential leaks.
 
-3. Usage
+## 3. Usage
 Launching the Infrastructure
 
 To orchestrate, build, and turn on the entire environment simultaneously via a single network switch layer, execute the following command in your terminal root:
@@ -51,7 +51,7 @@ Expected Inputs & Workflow Behaviors
 
     Deterministic Skill Evaluation: Type the phrase "find skills gap" into the input layout box. The backend skips standard conversational fallback generation, interfaces directly with the SQLite file, maps the text requirements, and prints out an alphabetized string list of structural gaps.
 
-4. API / Function Reference
+## 4. API / Function Reference
 Backend Endpoints: POST /chat
 
 Exposes the core request router interface used by the frontend network bridge.
@@ -78,7 +78,8 @@ Frontend JavaScript Core Functionality
 Docker Network Architecture Communication
 
 The system explicitly avoids using the insecure host network driver configuration. Instead, it provisions an isolated software bridge abstraction called app-network. Containers communicate via virtual proxy forwarding, securely binding incoming external host requests on ports 8000 and 8001 directly through the container runtime boundaries.
-5. Data / Assumptions
+
+## 5. Data / Assumptions
 System Data Flows
 Plaintext
 
@@ -96,7 +97,7 @@ Core Constraints & Logic Simplifications
 
     Week 2 Integration Strategy: Instead of executing a heavy local LLM that might hang or crash evaluation machines, the system queries the local jobs_d1.db SQLite structure directly to run a fast, deterministic post-filtering matching algorithm.
 
-6. Testing
+## 6. Testing
 Backend Testing Triage (curl)
 
 To verify the health and path resolution of the backend server independently of the web browser UI layout, run this command in an isolated terminal window:
@@ -113,7 +114,7 @@ Frontend UI Verification
 
     Layout Clearing Test: Verify that clicking Send resets both the text entry zone string value and the chosen file reference target area instantly to prevent prompt duplication.
 
-7. Limitations & Boundary Conditions
+## 7. Limitations & Boundary Conditions
 
     Lack of State Preservation: The system intentionally runs a bare-minimum conversation tracking framework. Following up on an output with contextual terms like "What should I learn first based on that?" causes the engine to lose focus, as previous dialogue turns are not written into an ongoing historical array structure.
 
@@ -121,7 +122,7 @@ Frontend UI Verification
 
     Alias Extraction Gaps: The deterministic comparison engine relies heavily on string mapping comparisons. If a resume lists “Advanced Query Writing” and the database requires “SQL”, the matching logic will flag it as a skill gap unless explicit hardcoded aliases (like matching MySQL to SQL) catch it.
 
-8. Architecture Reflection
+## 8. Architecture Reflection
 Design Choices & Containerization
 
 Decoupling the architecture into separated frontend and backend microservices ensures a highly maintainable, modern development lifecycle.
