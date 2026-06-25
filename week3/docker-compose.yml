@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # ─── FRONTEND CONTAINER SERVICE ───
+  frontend:
+    image: frontend:1.0
+    pull_policy: build
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  # ─── BACKEND CONTAINER SERVICE ───
+  backend:
+    image: backend:1.0
+    pull_policy: build
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      # This pulls the GEMINI_API_KEY from your system variables/local environment
+      # and securely injects it into the container automatically on startup.
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    networks:
+      - app-network
+
+# ─── ISOLATED NETWORK STRATEGY (MANDATORY) ───
+networks:
+  app-network:
+    driver: bridge # Securely isolates communication without using host network drivers
