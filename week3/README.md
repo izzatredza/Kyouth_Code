@@ -27,6 +27,7 @@ Make sure your host evaluation machine has the following tools installed before 
 
 ```text
 GEMINI_API_KEY=your_actual_google_gemini_api_key_here
+```
 
 Security Note: The .env file is explicitly blocked from Git tracking via .gitignore and omitted from image building processes via .dockerignore to completely eliminate credential leaks.
 
